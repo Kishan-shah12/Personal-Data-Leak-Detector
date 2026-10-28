@@ -33,7 +33,7 @@ async def scan_payload(
     doc_type = "Direct Text Input"
     filename = None
 
-    if file and file.filename:
+    if isinstance(file, UploadFile) and file.filename:
         filename = file.filename
         source = f"file:{filename}"
         raw_bytes = await file.read()

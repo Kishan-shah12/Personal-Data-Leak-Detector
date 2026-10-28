@@ -25,6 +25,18 @@ def mask_sensitive(value: str, keep_start: int = 2, keep_end: int = 2) -> str:
     return value[:keep_start] + ("*" * (len(value) - keep_start - keep_end)) + value[-keep_end:]
 
 
+def validate_phone_number(val: str) -> bool:
+    """Validates phone/mobile number to ensure correct digit count and reject dummy sequences."""
+    digits = re.sub(r"\D", "", val)
+    # Standard phone / mobile numbers range from 10 to 15 digits (E.164 compliant)
+    if len(digits) < 10 or len(digits) > 15:
+        return False
+    # Filter out repeated dummy sequences (e.g. 0000000000 or 1111111111)
+    if len(set(digits)) <= 2:
+        return False
+    return True
+
+
 PATTERNS: Dict[str, Dict[str, Any]] = {
     "Credit Card": {
         "pattern": re.compile(r"\b(?:\d{4}[-\s]?){3}\d{4}\b"),
@@ -74,9 +86,12 @@ PATTERNS: Dict[str, Dict[str, Any]] = {
         "recommendation": "Subject to GDPR/CCPA privacy compliance regulations.",
     },
     "Phone Number": {
-        "pattern": re.compile(r"(?:\+?\d{1,3}[-.\s]?)?(?:\(?\d{3}\)?[-.\s]?)?\d{3}[-.\s]?\d{4}\b"),
+        "pattern": re.compile(
+            r"(?<![A-Za-z0-9])(?:\+?\d{1,3}[-.\s]?)?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}(?!\d)"
+        ),
         "severity": "Medium",
-        "description": "Direct telephone contact number.",
+        "validator": validate_phone_number,
+        "description": "Direct telephone or mobile contact number.",
         "recommendation": "Verify consent before storing or transmitting contact information.",
     },
     "IPv4 Address": {
