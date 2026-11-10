@@ -17,6 +17,7 @@ from app.malware_scanner import (
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = BASE_DIR / "templates"
+STATIC_DIR = BASE_DIR / "static"
 
 
 def find_template_file(filename: str = "index.html") -> Path:
@@ -26,6 +27,20 @@ def find_template_file(filename: str = "index.html") -> Path:
         Path.cwd() / "templates" / filename,
         Path(__file__).resolve().parent.parent / "templates" / filename,
         Path(__file__).resolve().parent / "templates" / filename,
+    ]
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+    return candidates[0]
+
+
+def find_static_file(filename: str = "favicon.svg") -> Path:
+    """Robust multi-path static asset resolver."""
+    candidates = [
+        STATIC_DIR / filename,
+        Path.cwd() / "static" / filename,
+        Path(__file__).resolve().parent.parent / "static" / filename,
+        Path(__file__).resolve().parent / "static" / filename,
     ]
     for candidate in candidates:
         if candidate.exists():
@@ -55,6 +70,15 @@ def index() -> FileResponse:
     if not index_file.exists():
         raise HTTPException(status_code=404, detail="Template index.html not found")
     return FileResponse(index_file)
+
+
+@app.get("/favicon.ico", response_class=FileResponse)
+@app.get("/static/favicon.svg", response_class=FileResponse)
+def favicon() -> FileResponse:
+    fav_file = find_static_file("favicon.svg")
+    if not fav_file.exists():
+        raise HTTPException(status_code=404, detail="Favicon not found")
+    return FileResponse(fav_file, media_type="image/svg+xml")
 
 
 @app.post("/api/scan")
