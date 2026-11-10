@@ -1,27 +1,57 @@
+import os
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 
 from app.database import check_db_connection, leaks_collection
 from app.detector import scan_text
 from app.extractor import extract_document_text
-from app.malware_scanner import scan_for_malware_and_invisible_code
+from app.malware_scanner import (
+    scan_for_malware_and_invisible_code,
+    sanitize_text_payload,
+)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = BASE_DIR / "templates"
 
+
+def find_template_file(filename: str = "index.html") -> Path:
+    """Robust multi-path template resolver supporting local, Docker, and Vercel serverless runtimes."""
+    candidates = [
+        TEMPLATES_DIR / filename,
+        Path.cwd() / "templates" / filename,
+        Path(__file__).resolve().parent.parent / "templates" / filename,
+        Path(__file__).resolve().parent / "templates" / filename,
+    ]
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+    return candidates[0]
+
+
 app = FastAPI(
     title="SENTINEL CORE // Personal Data Leak & Malware Detection Matrix",
+    description="Real-time in-memory cybersecurity engine for sensitive data leak detection, malware inspection, and invisible code steganography analysis.",
     version="2.0.0",
+)
+
+# Production CORS Middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
 @app.get("/", response_class=FileResponse)
 def index() -> FileResponse:
-    index_file = TEMPLATES_DIR / "index.html"
+    index_file = find_template_file("index.html")
     if not index_file.exists():
         raise HTTPException(status_code=404, detail="Template index.html not found")
     return FileResponse(index_file)
@@ -181,6 +211,43 @@ async def scan_payload(
     }
 
 
+@app.post("/api/sanitize")
+async def sanitize_payload(
+    text: Optional[str] = Form(None),
+    file: Optional[UploadFile] = File(None),
+) -> Dict[str, Any]:
+    content = ""
+    filename = None
+
+    if isinstance(file, UploadFile) and file.filename:
+        filename = file.filename
+        raw_bytes = await file.read()
+        try:
+            content, _, _ = extract_document_text(filename, raw_bytes)
+        except Exception:
+            content = raw_bytes.decode("utf-8", errors="ignore")
+    elif text is not None and text.strip():
+        content = text
+    else:
+        raise HTTPException(
+            status_code=400,
+            detail="Please provide text or upload a document to cleanse.",
+        )
+
+    clean_text, removed_count = sanitize_text_payload(content)
+    return {
+        "status": "success",
+        "filename": filename,
+        "removed_characters_count": removed_count,
+        "sanitized_text": clean_text,
+        "message": (
+            f"Successfully stripped {removed_count} invisible character(s) / Trojan Source overrides."
+            if removed_count > 0
+            else "Payload was already clean. Zero invisible characters detected."
+        ),
+    }
+
+
 @app.get("/api/health")
 def health() -> Dict[str, Any]:
     return {
@@ -218,3 +285,11 @@ def health() -> Dict[str, Any]:
             "Any Binary / Document Payload (Safe in-memory quarantine inspection)",
         ],
     }
+
+
+if __name__ == "__main__":
+    import uvicorn
+
+    host = os.getenv("HOST", "0.0.0.0")
+    port = int(os.getenv("PORT", "8000"))
+    uvicorn.run("app.main:app", host=host, port=port, reload=False)

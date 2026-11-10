@@ -152,6 +152,14 @@ class TestSentinelCore(unittest.IsolatedAsyncioTestCase):
         self.assertGreaterEqual(res["malware_threat_count"], 1)
         self.assertTrue(res["safety_sandbox"]["zero_execution_guarantee"])
 
+    async def test_sanitize_endpoint(self):
+        from app.main import sanitize_payload
+        dirty_text = "clean\u200B\u200Ctext\u202Ereversed\u2069"
+        res = await sanitize_payload(text=dirty_text)
+        self.assertEqual(res["status"], "success")
+        self.assertEqual(res["removed_characters_count"], 4)
+        self.assertEqual(res["sanitized_text"], "cleantextreversed")
+
 
 if __name__ == "__main__":
     unittest.main()

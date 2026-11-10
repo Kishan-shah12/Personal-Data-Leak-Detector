@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  sentinel-core:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sentinel_core_app
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - HOST=0.0.0.0
+      - PORT=8000
+      - MONGO_URI=mongodb://mongo:27017
+      - DB_NAME=sentinel_matrix
+    depends_on:
+      mongo:
+        condition: service_healthy
+    networks:
+      - sentinel-net
+
+  mongo:
+    image: mongo:7.0
+    container_name: sentinel_mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=sentinel_matrix
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    networks:
+      - sentinel-net
+
+networks:
+  sentinel-net:
+    driver: bridge
+
+volumes:
+  mongo_data:
+    driver: local
+
