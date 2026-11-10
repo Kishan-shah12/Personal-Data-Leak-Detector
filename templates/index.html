@@ -1017,6 +1017,171 @@
       transition: width 0.5s ease;
     }
 
+    /* Application Footer & Creator Signature */
+    .app-footer {
+      margin-top: 2.5rem;
+      background: var(--bg-panel);
+      backdrop-filter: blur(16px);
+      border-radius: 14px;
+      padding: 1.5rem 1.8rem;
+      border: 1px solid var(--border-cyan);
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .app-footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--cyan-bright), transparent);
+      opacity: 0.6;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+    }
+
+    .footer-hex {
+      color: var(--cyan-bright);
+      font-size: 1rem;
+      text-shadow: 0 0 8px var(--glow-cyan);
+    }
+
+    .footer-title {
+      font-family: 'Orbitron', monospace;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: 0.05em;
+    }
+
+    .footer-sep {
+      color: var(--border-cyan);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .footer-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .footer-creator {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .creator-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+    }
+
+    .creator-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      background: rgba(0, 240, 255, 0.06);
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      padding: 0.45rem 0.95rem;
+      border-radius: 9999px;
+      text-decoration: none;
+      color: var(--text-main);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 0 12px rgba(0, 240, 255, 0.1);
+    }
+
+    .creator-pill:hover {
+      background: rgba(0, 240, 255, 0.15);
+      border-color: var(--cyan-bright);
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+    }
+
+    .creator-icon {
+      font-size: 0.95rem;
+    }
+
+    .creator-name {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 0.04em;
+      color: #ffffff;
+    }
+
+    .linkedin-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: #0a66c2;
+      color: #ffffff;
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      transition: background 0.2s ease;
+    }
+
+    .creator-pill:hover .linkedin-badge {
+      background: #0077b5;
+    }
+
+    .external-arrow {
+      font-size: 0.8rem;
+      transition: transform 0.2s ease;
+    }
+
+    .creator-pill:hover .external-arrow {
+      transform: translate(2px, -2px);
+    }
+
+    .footer-bottom-bar {
+      margin-top: 1rem;
+      padding-top: 0.85rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      color: var(--text-dim);
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .footer-creator {
+        width: 100%;
+        justify-content: space-between;
+      }
+    }
+
     /* Keyframes */
     @keyframes alert-pulse {
       0%, 100% { opacity: 1; }
@@ -1849,6 +2014,40 @@
       </div>
     </section>
     </main>
+
+    <!-- Global Application Footer & Creator Credit (Contentinfo Landmark) -->
+    <footer class="app-footer" role="contentinfo">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <span class="footer-hex" aria-hidden="true">◈</span>
+          <span class="footer-title">SENTINEL CORE</span>
+          <span class="footer-sep" aria-hidden="true">//</span>
+          <span class="footer-desc">Personal Data Leak &amp; In-Memory Malware Quarantine Matrix</span>
+        </div>
+
+        <div class="footer-creator">
+          <span class="creator-label">DEVELOPED &amp; ARCHITECTED BY</span>
+          <a href="https://www.linkedin.com/in/kishan-sah-b97a73315/" 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             class="creator-pill" 
+             title="Connect with Kishan Sah on LinkedIn">
+            <span class="creator-icon" aria-hidden="true">👨‍💻</span>
+            <span class="creator-name">Kishan Sah</span>
+            <span class="linkedin-badge">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="vertical-align: -1px;">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+              <span>LinkedIn</span>
+              <span class="external-arrow" aria-hidden="true">↗</span>
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="footer-bottom-bar">
+        <span>© 2026 SENTINEL CORE • ZERO-EXECUTION HOST ISOLATION GUARANTEED • CREATOR: KISHAN SAH</span>
+      </div>
+    </footer>
   </div>
 
   <!-- Three.js 3D Holographic Shield & Particle Constellations Script -->

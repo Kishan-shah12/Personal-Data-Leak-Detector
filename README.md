@@ -347,11 +347,19 @@ python3 -m unittest discover tests
 
 ---
 
+## 👨‍💻 Author & Creator
+
+* **Creator & Architect**: **Kishan Sah**
+* **LinkedIn**: [![LinkedIn](https://img.shields.io/badge/LinkedIn-Kishan%20Sah-0077b5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/kishan-sah-b97a73315/)
+* **Direct Profile**: [https://www.linkedin.com/in/kishan-sah-b97a73315/](https://www.linkedin.com/in/kishan-sah-b97a73315/)
+
+---
+
 ## 📜 Security Policy & License
 
 * **Security Policy**: All files submitted to SENTINEL CORE are processed in volatile memory. Files are never stored permanently unless MongoDB sync is explicitly configured by the administrator.
 * **License**: Distributed under the **MIT License**. See `LICENSE` for details.
 
 <div align="center">
-  <sub>Developed with 🛡️ for modern security teams and privacy-conscious developers.</sub>
+  <sub>Developed with 🛡️ by <strong>Kishan Sah</strong> for modern security teams and privacy-conscious developers.</sub>
 </div>
