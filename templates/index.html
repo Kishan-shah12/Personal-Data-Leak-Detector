@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="SENTINEL CORE - High-performance cybersecurity platform for real-time personal data leak detection, zero-width steganography decoding, and in-memory malware quarantine analysis.">
   <title>SENTINEL // Personal Data Leak Detector</title>
   
   <!-- Holographic Cyber Sentinel Favicon (Vector SVG + Self-Contained Fallback) -->
@@ -87,6 +88,33 @@
         linear-gradient(to bottom, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
       pointer-events: none;
       z-index: 1;
+    }
+
+    /* Accessibility Landmarks & Skip Navigation */
+    .skip-link {
+      position: absolute;
+      top: -60px;
+      left: 12px;
+      background: var(--cyan-bright);
+      color: #030712;
+      padding: 10px 18px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 700;
+      z-index: 10000;
+      border-radius: 6px;
+      text-decoration: none;
+      box-shadow: 0 0 15px var(--glow-cyan);
+      transition: top 0.2s ease-in-out;
+    }
+    .skip-link:focus {
+      top: 12px;
+      outline: 2px solid #ffffff;
+    }
+
+    .main-landmark {
+      display: block;
+      width: 100%;
     }
 
     .app-wrapper {
@@ -1588,15 +1616,18 @@
   </style>
 </head>
 <body>
+  <!-- Accessible Skip Navigation Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <!-- Overlay Scanlines & Cyber Grid -->
-  <div class="scanlines"></div>
-  <div class="ambient-grid"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="ambient-grid" aria-hidden="true"></div>
 
   <div class="app-wrapper">
-    <!-- Navbar -->
-    <header class="navbar">
+    <!-- Navbar (Banner Landmark) -->
+    <header class="navbar" role="banner">
       <div class="brand">
-        <div class="brand-logo-hex"></div>
+        <div class="brand-logo-hex" aria-hidden="true"></div>
         <div class="brand-text">
           <h1>SENTINEL CORE</h1>
           <span>Personal Data Leak & Malware Detection Matrix // 3D Quarantine Enclave</span>
@@ -1623,8 +1654,10 @@
       </div>
     </header>
 
-    <!-- HUD Metrics Ribbon -->
-    <section class="hud-metrics">
+    <!-- Main Content Landmark -->
+    <main id="main-content" class="main-landmark" role="main">
+      <!-- HUD Metrics Ribbon -->
+      <section class="hud-metrics" aria-label="Security Telemetry Metrics">
       <div class="metric-card" id="cardThreat">
         <div class="metric-label">System Threat Level</div>
         <div class="metric-value">
@@ -1653,7 +1686,7 @@
     </section>
 
     <!-- Core Interactive Workbench -->
-    <section class="workbench-grid">
+    <section class="workbench-grid" aria-label="Security Workbench and Threat Scanner">
       <!-- 3D Holographic Shield Viewport (Three.js WebGL) -->
       <div class="hologram-panel">
         <div class="hud-reticle tl"></div>
@@ -1815,6 +1848,7 @@
         </div>
       </div>
     </section>
+    </main>
   </div>
 
   <!-- Three.js 3D Holographic Shield & Particle Constellations Script -->
