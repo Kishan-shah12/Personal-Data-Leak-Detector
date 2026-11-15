@@ -1,3 +1,9 @@
+# ==============================================================================
+# SENTINEL CORE // Personal Data Leak & Malware Quarantine Engine
+# Copyright (c) 2026 Kishan Sah. All Rights Reserved.
+# Released under the terms of the MIT License.
+# ==============================================================================
+
 import re
 from typing import Any, Dict, List, Optional
 

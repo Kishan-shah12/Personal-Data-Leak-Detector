@@ -358,8 +358,8 @@ python3 -m unittest discover tests
 ## 📜 Security Policy & License
 
 * **Security Policy**: All files submitted to SENTINEL CORE are processed in volatile memory. Files are never stored permanently unless MongoDB sync is explicitly configured by the administrator.
-* **License**: Distributed under the **MIT License**. See `LICENSE` for details.
+* **License & Copyright**: Copyright (c) 2026 **Kishan Sah**. Released under the **MIT License**. See [`LICENSE`](LICENSE) for terms. All derivative works, distributions, or copies are legally required to preserve this copyright and permission notice.
 
 <div align="center">
-  <sub>Developed with 🛡️ by <strong>Kishan Sah</strong> for modern security teams and privacy-conscious developers.</sub>
+  <sub>Copyright © 2026 <strong>Kishan Sah</strong>. All rights reserved. Developed with 🛡️ for modern security teams and privacy-conscious developers.</sub>
 </div>
