@@ -342,6 +342,9 @@ python3 -m unittest discover tests
 ├── render.yaml             # Render cloud Blueprint specification
 ├── .env.example            # Environment configuration template
 ├── requirements.txt        # Production Python dependencies
+├── LICENSE                 # Official MIT License (Copyright (c) 2026 Kishan Sah)
+├── CONTRIBUTING.md         # Contribution guidelines, security invariants & DCO
+├── CONTRIBUTORS.md         # Official contributor directory and rights registry
 └── README.md               # Architecture documentation & quickstart guide
 ```
 
@@ -352,6 +355,15 @@ python3 -m unittest discover tests
 * **Creator & Architect**: **Kishan Sah**
 * **LinkedIn**: [![LinkedIn](https://img.shields.io/badge/LinkedIn-Kishan%20Sah-0077b5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/kishan-sah-b97a73315/)
 * **Direct Profile**: [https://www.linkedin.com/in/kishan-sah-b97a73315/](https://www.linkedin.com/in/kishan-sah-b97a73315/)
+
+---
+
+## 🤝 Contributing & Rights
+
+Contributions are welcome! To protect the project's zero-execution safety and intellectual property:
+* 📖 **Contributor Guidelines**: Please review [`CONTRIBUTING.md`](CONTRIBUTING.md) for workflow details, zero-execution security invariants, and coding standards.
+* 🎖️ **Contributors Roll & Rights**: View [`CONTRIBUTORS.md`](CONTRIBUTORS.md) to explore the contributor directory and developer rights framework.
+* ✍️ **Developer Certificate of Origin (DCO)**: All commits must be signed off (`git commit -s`).
 
 ---
 
